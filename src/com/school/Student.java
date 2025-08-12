@@ -14,6 +14,6 @@ public class Student {
 
     public void displayDetails() {
         System.out.println("Name: " + name);
-        System.out.println("Student ID: " + studentId);
+        System.out.println("Student Id: " + studentId);
     }
 }

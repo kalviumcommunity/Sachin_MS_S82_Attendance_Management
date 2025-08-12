@@ -13,6 +13,6 @@ public class Course {
 
     public void displayDetails() {
         System.out.println("Course Name: " + courseName);
-        System.out.println("Course ID: " + courseId);
+        System.out.println("Course Id: " + courseId);
     }
 }

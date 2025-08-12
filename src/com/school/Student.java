@@ -4,14 +4,16 @@ package com.school;
 public class Student {
     private int studentId;
     private String name;
-
-    public void setDetails(int id, String name) {
-        this.studentId = id;
+    private static int nextStudentIdCounter = 1;
+    
+    public Student(String name){
+        studentId = nextStudentIdCounter++;
         this.name = name;
     }
+    
 
     public void displayDetails() {
-        System.out.println("Student ID: " + studentId);
         System.out.println("Name: " + name);
+        System.out.println("Student Id: " + studentId);
     }
 }

@@ -5,10 +5,10 @@ public class Main {
     public static void main(String[] args) {
 
         Student[] students = {
-            new Student("Ram"),
-            new Student("Sita"),
-            new Student("Lakshman"),
-            new Student("Hanuman")
+            new Student("Ram","A"),
+            new Student("Sita","B"),
+            new Student("Lakshman","B"),
+            new Student("Hanuman","F")
         };
 
         Course[] courses = {
@@ -25,7 +25,7 @@ public class Main {
             if(i == 3){
                 pres = "aa";
             }
-            attendanceLog.add(new AttendanceRecord(students[i].getStudentId(),courses[i].getCourseId(),pres));
+            attendanceLog.add(new AttendanceRecord(students[i].getId(),courses[i].getCourseId(),pres));
         }
         System.out.println("");
 

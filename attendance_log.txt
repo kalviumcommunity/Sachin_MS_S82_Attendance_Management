@@ -1,0 +1,4 @@
+0,1,Present
+1,2,Absent
+2,3,Present
+3,4,Invalid

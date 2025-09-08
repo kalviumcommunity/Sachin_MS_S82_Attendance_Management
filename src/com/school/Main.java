@@ -4,19 +4,22 @@ import java.util.*;
 public class Main {
     public static void main(String[] args) {
 
-        Student[] students = {
-            new Student("Ram","A"),
-            new Student("Sita","B"),
-            new Student("Lakshman","B"),
-            new Student("Hanuman","F")
-        };
+        ArrayList<Student> students = new ArrayList<>();
 
-        Course[] courses = {
-            new Course("Full Stack Developer"),
-            new Course("Data Science"),
-            new Course("Cloud Computing"),
-            new Course("Blockchain Development")
-        };
+        
+            students.add(new Student("Ram","A"));
+            students.add(new Student("Sita","B"));
+            students.add(new Student("Lakshman","B"));
+            students.add(new Student("Hanuman","F"));
+        
+
+        ArrayList<Course> courses = new ArrayList<>();
+         
+            courses.add(new Course("Full Stack Developer"));
+            courses.add(new Course("Data Science"));
+            courses.add(new Course("Cloud Computing"));
+            courses.add(new Course("Blockchain Development"));
+        
 
         ArrayList<AttendanceRecord> attendanceLog = new ArrayList<>();
 
@@ -25,14 +28,21 @@ public class Main {
             if(i == 3){
                 pres = "aa";
             }
-            attendanceLog.add(new AttendanceRecord(students[i].getId(),courses[i].getCourseId(),pres));
+            attendanceLog.add(new AttendanceRecord(students.get(i).getId(),courses.get(i).getCourseId(),pres));
         }
         System.out.println("");
 
         System.out.println("Attendance Records:");
         System.out.println("");
+
         for(AttendanceRecord a:attendanceLog){
             a.displayRecord();
         }
+
+        FileStorageService storage = new FileStorageService();
+
+        storage.saveData(students, "students.txt");
+        storage.saveData(courses, "courses.txt");
+        storage.saveData(attendanceLog, "attendance_log.txt");
     }
 }

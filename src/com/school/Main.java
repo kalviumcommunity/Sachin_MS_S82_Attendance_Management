@@ -2,15 +2,21 @@ package  com.school;
 import java.util.*;
 
 public class Main {
+
+    public static void displaySchoolDirectory(List<Person> people){
+        System.out.println("School Directory:");
+        for(Person p:people){
+            p.displayDetails();
+        }
+    }
     public static void main(String[] args) {
 
-        ArrayList<Student> students = new ArrayList<>();
-
+        List<Person> schoolPeople = new ArrayList<>();
         
-            students.add(new Student("Ram","A"));
-            students.add(new Student("Sita","B"));
-            students.add(new Student("Lakshman","B"));
-            students.add(new Student("Hanuman","F"));
+            schoolPeople.add(new Student("Ram","A"));
+            schoolPeople.add(new Student("Sita","B"));
+            schoolPeople.add(new Student("Lakshman","B"));
+            schoolPeople.add(new Student("Hanuman","F"));
         
 
         ArrayList<Course> courses = new ArrayList<>();
@@ -20,7 +26,14 @@ public class Main {
             courses.add(new Course("Cloud Computing"));
             courses.add(new Course("Blockchain Development"));
         
+        List<Student> students = new ArrayList<>();
 
+        for(Person p:schoolPeople){
+            if(p instanceof Student){
+                students.add((Student) p);
+            }
+        }
+        displaySchoolDirectory(schoolPeople);
         ArrayList<AttendanceRecord> attendanceLog = new ArrayList<>();
 
         for(int i =0;i<4;i++){
@@ -28,7 +41,7 @@ public class Main {
             if(i == 3){
                 pres = "aa";
             }
-            attendanceLog.add(new AttendanceRecord(students.get(i).getId(),courses.get(i).getCourseId(),pres));
+            attendanceLog.add(new AttendanceRecord(schoolPeople.get(i).getId(),courses.get(i).getCourseId(),pres));
         }
         System.out.println("");
 
@@ -40,7 +53,7 @@ public class Main {
         }
 
         FileStorageService storage = new FileStorageService();
-
+        
         storage.saveData(students, "students.txt");
         storage.saveData(courses, "courses.txt");
         storage.saveData(attendanceLog, "attendance_log.txt");

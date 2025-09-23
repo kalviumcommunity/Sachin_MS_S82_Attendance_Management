@@ -27,9 +27,9 @@ public class AttendanceRecord implements Storable{
     }
 
     public void displayRecord(){
-        System.out.print("Student Id:"+this.studentId+"\t");
-        System.out.print("Course Id :"+this.courseId+"\t");
-        System.out.print("Status :"+this.status+"\n");
+        System.out.print("Student Id:"+this.getStudentId()+"\t");
+        System.out.print("Course Id :"+this.getCourseId()+"\t");
+        System.out.print("Status :"+this.getStatus()+"\n");
     } 
 
     @Override

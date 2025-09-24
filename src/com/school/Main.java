@@ -19,7 +19,7 @@ public class Main {
             schoolPeople.add(new Student("Hanuman","F"));
         
 
-        ArrayList<Course> courses = new ArrayList<>();
+        List<Course> courses = new ArrayList<>();
          
             courses.add(new Course("Full Stack Developer"));
             courses.add(new Course("Data Science"));
@@ -34,28 +34,23 @@ public class Main {
             }
         }
         displaySchoolDirectory(schoolPeople);
-        ArrayList<AttendanceRecord> attendanceLog = new ArrayList<>();
+        FileStorageService storage = new FileStorageService();
+        AttendanceService attendanceService = new AttendanceService(storage);
 
         for(int i =0;i<4;i++){
             String pres = i%2==0?"Present":"Absent";
             if(i == 3){
                 pres = "aa";
             }
-            attendanceLog.add(new AttendanceRecord(schoolPeople.get(i).getId(),courses.get(i).getCourseId(),pres));
-        }
-        System.out.println("");
-
-        System.out.println("Attendance Records:");
-        System.out.println("");
-
-        for(AttendanceRecord a:attendanceLog){
-            a.displayRecord();
+            attendanceService.markAttendance(students.get(i), courses.get(i), pres);
         }
 
-        FileStorageService storage = new FileStorageService();
+        System.out.println("\n Attendance Records: ");
+        attendanceService.displayAttendanceLog();
+
         
         storage.saveData(students, "students.txt");
         storage.saveData(courses, "courses.txt");
-        storage.saveData(attendanceLog, "attendance_log.txt");
+        attendanceService.saveAttendanceData();
     }
 }

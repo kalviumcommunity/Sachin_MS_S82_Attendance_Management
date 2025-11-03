@@ -7,7 +7,7 @@ public class Person {
     protected String name;
 
     public Person(String name) {
-        id = nextIdCounter++;    
+        id = ++nextIdCounter;    
         this.name = name;
     }
     public int getId(){

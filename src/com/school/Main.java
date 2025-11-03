@@ -1,56 +1,44 @@
-package  com.school;
+package com.school;
+
 import java.util.*;
 
 public class Main {
 
-    public static void displaySchoolDirectory(List<Person> people){
+    public static void displaySchoolDirectory(List<Person> people) {
         System.out.println("School Directory:");
-        for(Person p:people){
+        for (Person p : people) {
             p.displayDetails();
         }
     }
+
     public static void main(String[] args) {
 
-        List<Person> schoolPeople = new ArrayList<>();
-        
-            schoolPeople.add(new Student("Ram","A"));
-            schoolPeople.add(new Student("Sita","B"));
-            schoolPeople.add(new Student("Lakshman","B"));
-            schoolPeople.add(new Student("Hanuman","F"));
-        
+        FileStorageService storageService = new FileStorageService();
+        RegistrationService registrationService = new RegistrationService(storageService);
+        AttendanceService attendanceService = new AttendanceService(storageService, registrationService);
 
-        List<Course> courses = new ArrayList<>();
-         
-            courses.add(new Course("Full Stack Developer"));
-            courses.add(new Course("Data Science"));
-            courses.add(new Course("Cloud Computing"));
-            courses.add(new Course("Blockchain Development"));
-        
-        List<Student> students = new ArrayList<>();
+        registrationService.registerStudent(new Student( "Ram", "A"));
+        registrationService.registerStudent(new Student( "Sita", "B"));
+        registrationService.registerStudent(new Student( "Lakshman", "B"));
+        registrationService.registerStudent(new Student( "Hanuman", "F"));
 
-        for(Person p:schoolPeople){
-            if(p instanceof Student){
-                students.add((Student) p);
-            }
-        }
-        displaySchoolDirectory(schoolPeople);
-        FileStorageService storage = new FileStorageService();
-        AttendanceService attendanceService = new AttendanceService(storage);
+        registrationService.registerCourse(new Course( "Full Stack Developer"));
+        registrationService.registerCourse(new Course( "Data Science"));
+        registrationService.registerCourse(new Course( "Cloud Computing"));
+        registrationService.registerCourse(new Course( "Blockchain Development"));
 
-        for(int i =0;i<4;i++){
-            String pres = i%2==0?"Present":"Absent";
-            if(i == 3){
-                pres = "aa";
-            }
-            attendanceService.markAttendance(students.get(i), courses.get(i), pres);
-        }
+        displaySchoolDirectory(registrationService.getAllPeople());
 
-        System.out.println("\n Attendance Records: ");
+        attendanceService.markAttendance(1, 1, "Present");
+        attendanceService.markAttendance(2, 2, "Absent");
+        attendanceService.markAttendance(3, 3, "Present");
+        attendanceService.markAttendance(4, 4, "AA"); 
+
+        System.out.println("\nAttendance Records:");
         attendanceService.displayAttendanceLog();
 
-        
-        storage.saveData(students, "students.txt");
-        storage.saveData(courses, "courses.txt");
+        registrationService.saveAllRegistrations();
         attendanceService.saveAttendanceData();
+
     }
 }

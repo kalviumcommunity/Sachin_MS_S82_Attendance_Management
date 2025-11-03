@@ -6,35 +6,21 @@ import java.util.*;
 public class AttendanceService {
     private  List<AttendanceRecord> attendanceLog;
     private FileStorageService storageService;
+    private RegistrationService registrationService;
 
-    public AttendanceService(FileStorageService storageService){
+    public AttendanceService(FileStorageService storageService,RegistrationService registrationService){
         this.storageService = storageService;
+        this.registrationService = registrationService;
         this.attendanceLog = new ArrayList<>();
     }
 
     public void markAttendance(Student student, Course course, String status){
         attendanceLog.add(new AttendanceRecord(student.getId(),course.getCourseId(),status));
     }   
-    private Student findStudentById(List<Student> students,int studentId){
-        for(Student student:students){
-            if(student.getId() == studentId){
-                return student;
-            }
-        }
-        return students.get(0);
-    }
-    private Course findCourseById(List<Course> courses, int courseId){
-        for(Course course:courses){
-            if(course.getCourseId() == courseId){
-                return course;
-            }
-        }
-        return courses.get(0);
-    }
-    
-    public void markAttendance(int studentId, int courseId, String status, List<Student> allStudents, List<Course> allCourses){
-        Student student = findStudentById(allStudents,studentId);
-        Course course = findCourseById(allCourses,courseId);
+
+    public void markAttendance(int studentId, int courseId, String status){
+        Student student = registrationService.findStudentById(studentId);
+        Course course = registrationService.findCourseById(courseId);
 
         markAttendance(student, course, status);
 

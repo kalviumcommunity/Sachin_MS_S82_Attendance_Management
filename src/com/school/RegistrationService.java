@@ -1,7 +1,6 @@
 package com.school;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+import java.awt.desktop.SystemSleepEvent;
+import java.util.*;
 
 public class RegistrationService{
     private List<Student> students;
@@ -28,8 +27,8 @@ public class RegistrationService{
     public void registerStaff(Staff staff){
         staffMembers.add(staff);
     }
-    public void registerCourse(Course course){
-        courses.add(course);
+    public void createCourse(String courseName,int capacity){
+        courses.add(new Course(courseName,capacity));
     }
 
     public List<Student> getStudents(){
@@ -43,6 +42,13 @@ public class RegistrationService{
     }
     public List<Course> getCourses(){
         return courses;
+    }
+    public boolean enrollStudentInCourse(Student student,Course course){
+        if(course.addStudent(student)){
+            return true;
+        }
+        System.out.println("Capacity is full for the course");
+        return false;
     }
     
     public Student findStudentById(int id){

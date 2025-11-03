@@ -1,4 +1,4 @@
-1,Full Stack Developer
-2,Data Science
-3,Cloud Computing
-4,Blockchain Development
+1, Full Stack Developer, 2
+2, Data Science, 2
+3, Cloud Computing, 1
+4, Blockchain Development, 1
